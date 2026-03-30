@@ -45,9 +45,9 @@ function checkHostType() {
         }
     } else if (typeof browser === "object") {
         if (typeof browser.tabs === "object") {
-            if (typeof browser.tabs.create === "function") {
+            if (typeof browser !== "undefined" && browser.runtime) {
                 hostType = "firefox";
-            } else if (typeof chrome.tabs.create === "function") {
+            } else if (typeof chrome !== "undefined" && chrome.runtime) {
                 hostType = "chrome";
             }
         }
