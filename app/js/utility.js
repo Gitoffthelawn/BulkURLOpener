@@ -35,23 +35,11 @@ function checkHostType() {
         hostType = "electron";
         return hostType;
     }
-    if (typeof browser === "undefined") {
-        if (typeof chrome === "object") {
-            if (typeof chrome.tabs === "object") {
-                if (typeof chrome.tabs.create === "function") {
-                    hostType = "chrome";
-                }
-            }
-        }
-    } else if (typeof browser === "object") {
-        if (typeof browser.tabs === "object") {
-            if (typeof browser !== "undefined" && browser.runtime) {
-                hostType = "firefox";
-            } else if (typeof chrome !== "undefined" && chrome.runtime) {
-                hostType = "chrome";
-            }
-        }
-    } else {
+    if (typeof browser !== "undefined" && browser.runtime) {
+        hostType = "firefox";
+    } else if (typeof chrome !== "undefined" && chrome.runtime) {
+        hostType = "chrome";
+    }  else {
         // Fallback if all checks fail, then the app is most likely the web app version.
         hostType = "webapp";
     }
