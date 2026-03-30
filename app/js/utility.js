@@ -35,11 +35,11 @@ function checkHostType() {
         hostType = "electron";
         return hostType;
     }
-    if (typeof browser !== "undefined" && browser.runtime) {
-        hostType = "firefox";
-    } else if (typeof chrome !== "undefined" && chrome.runtime) {
+    if (typeof chrome !== "undefined" && chrome.runtime) {
         hostType = "chrome";
-    }  else {
+    } else if (typeof browser !== "undefined" && browser.runtime) {
+        hostType = "firefox";
+    } else {
         // Fallback if all checks fail, then the app is most likely the web app version.
         hostType = "webapp";
     }
